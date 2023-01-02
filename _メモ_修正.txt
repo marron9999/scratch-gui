@@ -1,0 +1,4 @@
+#1	scratch-gui/src/lib\make-toolbox-xml.js
+		ツールボックスアイコンの変更
+	scratch-gui/src/lib\toolbox/*
+		ツールボックスアイコン(PNG)の追加

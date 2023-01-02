@@ -1,0 +1,80 @@
+TOOLS
+
+	node 18.12.1 x64
+	git 2.26.2 x64
+	github desktop 3.1.2 x64
+
+	for scratch-blocks
+		Openjdk 18 x64 (build 18+36-2087)
+		python 2.7.17 x64
+
+STEP1) start develop env.
+
+	cd /d \java\github
+	set NODE_OPTIONS=--openssl-legacy-provider
+	cmd /c "C:\Program Files\Git\git-bash.exe"
+
+	STEP2～STEP7はgit-bash下で行う
+
+STEP2) build scratch-vm 1.2.54 (develop)
+
+	npm install
+	npm audit fix
+	npm run build
+	npm link
+
+STEP3) build scratch-gui 1.2.6 (develop)
+
+	npm install
+	npm audit fix
+	npm link scratch-vm
+
+STEP4) start scratch-gui
+
+	npm start
+
+	and open http://localhost:8601 by browser 
+
+	CTRL+Cでscratch-guiを止める
+
+STEP5) scratch-blocks 0.1.0 (develop)
+
+	npm install		エラーが通知されるが気にしない
+
+	npm run build		エラーが通知されるが気にしない
+				以下の４ファイルが作成されればOK
+				blockl ～.js
+	./local_build_h.sh
+	./local_build_v.sh
+				上記までで、下記の７ファイル作成されればOK
+				blockl ～.js
+	npm link
+
+STEP6) build scratch-gui 1.2.6 (develop)
+
+	npm link scratch-vm scratch-blocks
+
+STEP7) start scratch-gui
+
+	npm start
+
+	and open http://localhost:8601 by browser 
+
+	CTRL+Cでscratch-guiを止める
+
+STEP8) start cmd.exe
+
+	cd ～\scratch-gui\node_modules
+	dir scr*		以下のような表示を確認	
+
+<DIR>          scratch-audio
+<JUNCTION>     scratch-blocks [ ～\scratch-blocks]
+<DIR>          scratch-l10n
+<DIR>          scratch-paint
+<DIR>          scratch-render
+<DIR>          scratch-render-fonts
+<DIR>          scratch-semantic-release-config
+<DIR>          scratch-storage
+<DIR>          scratch-svg-renderer
+<JUNCTION>     scratch-vm [ ～\scratch-vm]
+
