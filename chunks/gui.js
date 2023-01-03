@@ -202,14 +202,19 @@ var handleTelemetryModalOptOut = function handleTelemetryModalOptOut() {
     onTelemetryModalCancel: handleTelemetryModalCancel,
     onTelemetryModalOptIn: handleTelemetryModalOptIn,
     onTelemetryModalOptOut: handleTelemetryModalOptOut
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
-    canEditTitle: true,
-    backpackVisible: true,
-    showComingSoon: true,
+  }) :
+  /*#__PURE__*/
+  //{{ #3
+  // �g���Ȃ��@�\���폜
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+    canEditTitle: true //backpackVisible
+    ,
+    showComingSoon: false,
     backpackHost: backpackHost,
-    canSave: false,
-    onClickLogo: onClickLogo
-  }), appTarget);
+    canSave: false //onClickLogo={onClickLogo}
+
+  }), //}} #3
+  appTarget);
 });
 
 /***/ }),
