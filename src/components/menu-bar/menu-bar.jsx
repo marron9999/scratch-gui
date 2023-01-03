@@ -29,6 +29,10 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
+//{{ #2
+import { makeProjectHTML, labelMakeProjectHTML } from '../../containers/sb3-makehtml.jsx';
+//}} #2
+
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
@@ -171,6 +175,9 @@ class MenuBar extends React.Component {
             'handleLanguageMouseUp',
             'handleRestoreOption',
             'getSaveToComputerHandler',
+//{{ #2
+            'handleClickMakeHTML',
+//}} #2
             'restoreOptionMessage'
         ]);
     }
@@ -251,6 +258,14 @@ class MenuBar extends React.Component {
             }
         };
     }
+
+//{{ #2
+    handleClickMakeHTML () {
+        makeProjectHTML(this.props.projectTitle, this.props.vm);
+        this.props.onRequestCloseFile();
+    }
+//}} #2
+
     handleLanguageMouseUp (e) {
         if (!this.props.languageMenuOpen) {
             this.props.onClickLanguage(e);
@@ -377,6 +392,11 @@ class MenuBar extends React.Component {
                 {remixMessage}
             </Button>
         );
+
+//{{ #2
+		const textMakeHTML = labelMakeProjectHTML();
+//}} #2
+
         // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
         return (
@@ -477,6 +497,11 @@ class MenuBar extends React.Component {
                                                 />
                                             </MenuItem>
                                         )}</SB3Downloader>
+                                    </MenuSection>
+                                    <MenuSection>
+                                         <MenuItem onClick={this.handleClickMakeHTML}>
+                                            {textMakeHTML}
+                                        </MenuItem>
                                     </MenuSection>
                                 </MenuBarMenu>
                             </div>

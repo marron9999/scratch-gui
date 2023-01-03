@@ -1,4 +1,17 @@
-#1	scratch-gui/src/lib\make-toolbox-xml.js
+#1	scratch-gui\src\lib\make-toolbox-xml.js
 		ツールボックスアイコンの変更
-	scratch-gui/src/lib\toolbox/*
+	scratch-gui\src\lib\toolbox/*
 		ツールボックスアイコン(PNG)の追加
+
+#2	scratch-vm\src\serialization\sb3-html.js
+		SB3-HTML変換処理を追加
+	scratch-vm\src\virtual-machine.js
+		SB3-HTML変換呼び出しを追加
+	scratch-gui\package.json
+		format-messageを追加
+	scratch-gui\src\components\menu-bar\menu-bar.jsx
+		SB3-HTML変換メニューを追加
+	scratch-gui\src\containers\sb3-makehtml.jsx
+		SB3-HTML変換メニュー処理を追加
+	scratch-gui\src\lib\opcode-infos.js
+		scratch-blocks opecode定義を追加
