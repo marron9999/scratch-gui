@@ -19,7 +19,11 @@ import LanguageSelector from '../../containers/language-selector.jsx';
 import SaveStatus from './save-status.jsx';
 import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
-import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import {MenuItem, MenuSection
+//{{ #5
+, MenuStyle, MenuDefine
+//}} #5
+} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AuthorInfo from './author-info.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
@@ -32,6 +36,12 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 //{{ #2
 import { makeProjectHTML, labelMakeProjectHTML } from '../../containers/sb3-makehtml.jsx';
 //}} #2
+
+//{{ #5
+import { labelLoadCache, getCacheInfos, loadCacheImage } from '../../containers/sb3-loadcache.jsx';
+import { setProjectTitle } from '../../reducers/project-title';
+import ScratchBlocks from 'scratch-blocks';
+//}} #5
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -397,8 +407,52 @@ class MenuBar extends React.Component {
 		const textMakeHTML = labelMakeProjectHTML();
 //}} #2
 
+//{{ #5		
+		let menuSection = "image_tooltip_define";
+		let menuStyle =
+			  ".image_tooltip { position: relative; }"
+			+ ".image_tooltip:after { position: absolute; border: 1px solid hsla(215, 100%, 65%, 1); background: white; top: -1px; left: calc(100% + 2px); z-index: 1; display:none; }"
+			+ ".image_tooltip:hover:after { display:inline-block; }"
+			;
+		let text = labelLoadCache(true);
+		let menuCache = [];
+		let uniqueId = this.props.vm.runtime.extend.uniqueId;
+		let projects = getCacheInfos(true);
+		if(projects.length >= 1) {
+			if(projects[0].uniqueId == uniqueId) {
+				projects.shift();
+			}
+		}
+		for(let i = 0; i < projects.length; i++) {
+			if(i == 8) break;
+			menuCache.push({
+					name:"image_tooltip cache" + projects[i].cacheId,
+					title:text.replace("%1", projects[i].filename.replace(".sb3", "")
+						+ " (" + ( projects[i].date + " " +  projects[i].time).trim() + ")"),
+					onclick:function() {
+						this.props.onStartSelectingCacheUpload(projects[i].cacheId);
+					}.bind(this)
+			});
+			loadCacheImage(projects[i].cacheId, function(cacheId, buffer, size) {
+				let e = document.getElementsByClassName(menuSection);
+				if(e.length > 0)
+					e[0].innerHTML += "<style>.image_tooltip.cache" + cacheId + ":after {"
+						+ "content:url(" + buffer + ");"
+						+ "width:" + size[0] + "px;"
+						+ "height:" + size[1] + "px;"
+						+ "}</style>";
+			});
+		}
+//}} #5
+
         // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
+//{{ #2		
+		// MenuItem: this.props.onStartSelectingFileUpload
+//}} #2		
+//{{ #5
+		// MeniItem: from appendName={menuCache[0].name} to appendName={menuCache[7].name}
+//}} #5		
         return (
             <Box
                 className={classNames(
@@ -503,6 +557,80 @@ class MenuBar extends React.Component {
                                             {textMakeHTML}
                                         </MenuItem>
                                     </MenuSection>
+                                    {(menuCache.length > 0) && (
+                                    <MenuStyle value={menuStyle} />
+                                    )}
+                                    {(menuCache.length > 0) && (
+                                    <MenuDefine name={menuSection} />
+                                    )}
+                                    {(menuCache.length > 0) && (
+                                    <MenuSection>
+                                        {(menuCache.length >= 1) && (
+                                            <MenuItem
+                                                appendName={menuCache[0].name}
+                                                onClick={menuCache[0].onclick}
+                                            >
+                                                {menuCache[0].title}
+                                            </MenuItem>
+                                        )}
+                                        {(menuCache.length >= 2) && (
+                                            <MenuItem
+                                                appendName={menuCache[1].name}
+                                                onClick={menuCache[1].onclick}
+                                            >
+                                                {menuCache[1].title}
+                                            </MenuItem>
+                                        )}
+                                        {(menuCache.length >= 3) && (
+                                            <MenuItem
+                                                appendName={menuCache[2].name}
+                                                onClick={menuCache[2].onclick}
+                                            >
+                                                {menuCache[2].title}
+                                            </MenuItem>
+                                        )}
+                                        {(menuCache.length >= 4) && (
+                                            <MenuItem
+                                                appendName={menuCache[3].name}
+                                                onClick={menuCache[3].onclick}
+                                            >
+                                                {menuCache[3].title}
+                                            </MenuItem>
+                                        )}
+                                        {(menuCache.length >= 5) && (
+                                            <MenuItem
+                                                appendName={menuCache[4].name}
+                                                onClick={menuCache[4].onclick}
+                                            >
+                                                {menuCache[4].title}
+                                            </MenuItem>
+                                        )}
+                                        {(menuCache.length >= 6) && (
+                                            <MenuItem
+                                                appendName={menuCache[5].name}
+                                                onClick={menuCache[5].onclick}
+                                            >
+                                                {menuCache[5].title}
+                                            </MenuItem>
+                                        )}
+                                        {(menuCache.length >= 7) && (
+                                            <MenuItem
+                                                appendName={menuCache[6].name}
+                                                onClick={menuCache[6].onclick}
+                                            >
+                                                {menuCache[6].title}
+                                            </MenuItem>
+                                        )}
+                                        {(menuCache.length >= 8) && (
+                                            <MenuItem
+                                                appendName={menuCache[7].name}
+                                                onClick={menuCache[7].onclick}
+                                            >
+                                                {menuCache[7].title}
+                                            </MenuItem>
+                                        )}
+                                    </MenuSection>
+                                    )}
                                 </MenuBarMenu>
                             </div>
                         )}
@@ -840,6 +968,9 @@ MenuBar.propTypes = {
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
+//{{ #5
+    onStartSelectingCacheUpload: PropTypes.func,
+//}} #5
     onToggleLoginOpen: PropTypes.func,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,

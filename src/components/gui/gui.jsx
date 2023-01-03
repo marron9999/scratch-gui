@@ -109,6 +109,9 @@ const GUIComponent = props => {
         onShare,
         onShowPrivacyPolicy,
         onStartSelectingFileUpload,
+//{{ #5
+        onStartSelectingCacheUpload,
+//}} #5
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
@@ -235,6 +238,9 @@ const GUIComponent = props => {
                     onSeeCommunity={onSeeCommunity}
                     onShare={onShare}
                     onStartSelectingFileUpload={onStartSelectingFileUpload}
+//{{ #5
+                    onStartSelectingCacheUpload={onStartSelectingCacheUpload}
+//}} #5
                     onToggleLoginOpen={onToggleLoginOpen}
                 />
                 <Box className={styles.bodyWrapper}>
@@ -411,6 +417,9 @@ GUIComponent.propTypes = {
     onShare: PropTypes.func,
     onShowPrivacyPolicy: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
+//{{ #5
+    onStartSelectingCacheUpload: PropTypes.func,
+//}} #5
     onTabSelect: PropTypes.func,
     onTelemetryModalCancel: PropTypes.func,
     onTelemetryModalOptIn: PropTypes.func,

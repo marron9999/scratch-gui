@@ -21,3 +21,31 @@
 
 #4	scratch-gui\src\components\language-selector\language-selector.css
 		言語選択上のマウス形状を修正
+
+#5	scratch-vm\src\engine\runtime.js
+		拡張情報変数の追加
+	scratch-vm\src\serialization\sb3.js
+		拡張情報変数の変更
+	scratch-vm\src\virtual-machine.js
+		拡張情報変数へユニークIDを設定
+
+	scratch-gui\src\components\gui\gui.jsx
+		キャッシュへのSB3自動保存と読み込み
+	scratch-gui\src\components\menu-bar\menu-bar.jsx
+		メニュー項目(キャッシュ化プロジェクト)を追加
+	scratch-gui\src\components\menu\menu.jsx
+		メニュー項目(キャッシュ化プロジェクト)を追加
+	scratch-gui\src\containers\blocks.jsx
+		キャッシュ処理用のイベントリスナーを追加
+	scratch-gui\src\containers\gui.jsx
+		キャッシュ処理用のHOC宣言
+	scratch-gui\src\containers\sb3-loadcache.jsx
+		キャッシュ処理を追加
+	scratch-gui\src\lib\cache-db.js
+		キャッシュ(ローカルDB)処理を追加
+	scratch-gui\src\lib\cache-uploader-hoc.jsx
+		キャッシュ用のI/O処理を追加
+	scratch-gui\src\lib\query-parser-hoc.jsx
+		キャッシュのI/O処理を追加
+	scratch-gui\src\reducers\project-state.js
+		用のI/O処理を追加

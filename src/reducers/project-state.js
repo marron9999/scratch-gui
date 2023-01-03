@@ -18,6 +18,10 @@ const START_CREATING_NEW = 'scratch-gui/project-state/START_CREATING_NEW';
 const START_ERROR = 'scratch-gui/project-state/START_ERROR';
 const START_FETCHING_NEW = 'scratch-gui/project-state/START_FETCHING_NEW';
 const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-state/START_LOADING_VM_FILE_UPLOAD';
+//{{ #5
+const START_LOADING_VM_CACHE_UPLOAD = 'scratch-gui/project-state/START_LOADING_VM_CACHE_UPLOAD';
+const DONE_VM_CACHE_WITH_ID = 'scratch-gui/project-state/DONE_VM_CACHE_WITH_ID';
+//}} #5
 const START_MANUAL_UPDATING = 'scratch-gui/project-state/START_MANUAL_UPDATING';
 const START_REMIXING = 'scratch-gui/project-state/START_REMIXING';
 const START_UPDATING_BEFORE_CREATING_COPY = 'scratch-gui/project-state/START_UPDATING_BEFORE_CREATING_COPY';
@@ -34,6 +38,10 @@ const LoadingState = keyMirror({
     FETCHING_NEW_DEFAULT: null,
     FETCHING_WITH_ID: null,
     LOADING_VM_FILE_UPLOAD: null,
+//{{ #5
+    LOADING_VM_CACHE_UPLOAD: null,
+    VM_CACHE_WITH_ID: null,
+//}} #5
     LOADING_VM_NEW_DEFAULT: null,
     LOADING_VM_WITH_ID: null,
     MANUAL_UPDATING: null,
@@ -48,6 +56,9 @@ const LoadingStates = Object.keys(LoadingState);
 
 const getIsFetchingWithoutId = loadingState => (
     // LOADING_VM_FILE_UPLOAD is an honorary fetch, since there is no fetching step for file uploads
+//{{ #5
+    loadingState === LoadingState.LOADING_VM_CACHE_UPLOAD ||
+//}} #5
     loadingState === LoadingState.LOADING_VM_FILE_UPLOAD ||
     loadingState === LoadingState.FETCHING_NEW_DEFAULT
 );
@@ -60,6 +71,9 @@ const getIsLoadingWithId = loadingState => (
     loadingState === LoadingState.LOADING_VM_NEW_DEFAULT
 );
 const getIsLoading = loadingState => (
+//{{ #5
+    loadingState === LoadingState.LOADING_VM_CACHE_UPLOAD ||
+//}} #5
     loadingState === LoadingState.LOADING_VM_FILE_UPLOAD ||
     loadingState === LoadingState.LOADING_VM_WITH_ID ||
     loadingState === LoadingState.LOADING_VM_NEW_DEFAULT
@@ -67,6 +81,11 @@ const getIsLoading = loadingState => (
 const getIsLoadingUpload = loadingState => (
     loadingState === LoadingState.LOADING_VM_FILE_UPLOAD
 );
+//{{ #5
+const getIsLoadingCacheUpload = loadingState => (
+    loadingState === LoadingState.LOADING_VM_CACHE_UPLOAD
+);
+//}} #5
 const getIsCreatingNew = loadingState => (
     loadingState === LoadingState.CREATING_NEW
 );
@@ -108,6 +127,9 @@ const initialState = {
     error: null,
     projectData: null,
     projectId: null,
+//{{ #5
+    cacheId: null,
+//}} #5
     loadingState: LoadingState.NOT_LOADED
 };
 
@@ -142,7 +164,11 @@ const reducer = function (state, action) {
         }
         return state;
     case DONE_LOADING_VM_WITHOUT_ID:
-        if (state.loadingState === LoadingState.LOADING_VM_FILE_UPLOAD ||
+        if (
+//{{ #5
+            state.loadingState === LoadingState.LOADING_VM_CACHE_UPLOAD ||
+//}} #5
+            state.loadingState === LoadingState.LOADING_VM_FILE_UPLOAD ||
             state.loadingState === LoadingState.LOADING_VM_NEW_DEFAULT) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.SHOWING_WITHOUT_ID,
@@ -158,7 +184,11 @@ const reducer = function (state, action) {
         }
         return state;
     case DONE_LOADING_VM_TO_SAVE:
-        if (state.loadingState === LoadingState.LOADING_VM_FILE_UPLOAD) {
+        if (
+//{{ #5
+            state.loadingState === LoadingState.LOADING_VM_CACHE_UPLOAD ||
+//}} #5
+            state.loadingState === LoadingState.LOADING_VM_FILE_UPLOAD) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.AUTO_UPDATING
             });
@@ -244,6 +274,12 @@ const reducer = function (state, action) {
                     projectId: action.projectId
                 });
             }
+//{{ #5
+        } else if (state.loadingState === LoadingState.LOADING_VM_CACHE_UPLOAD) {
+            return Object.assign({}, state, {
+                loadingState: LoadingState.VM_CACHE_WITH_ID
+            });
+//}} #5
         } else { // allow any other states to transition to fetching project
             // if setting the default project id, specifically fetch that project
             if (action.projectId === defaultProjectId || action.projectId === null) {
@@ -294,6 +330,22 @@ const reducer = function (state, action) {
             });
         }
         return state;
+//{{ #5
+    case START_LOADING_VM_CACHE_UPLOAD:
+        if ([
+            LoadingState.NOT_LOADED,
+            LoadingState.SHOWING_WITH_ID,
+            LoadingState.SHOWING_WITHOUT_ID
+        ].includes(state.loadingState)) {
+                let cacheId = action.cacheId;
+				if(cacheId == undefined) cacheId = null;
+            return Object.assign({}, state, {
+                loadingState: LoadingState.LOADING_VM_CACHE_UPLOAD,
+                cacheId: cacheId
+            });
+        }
+        return state;
+//}} #5
     case START_MANUAL_UPDATING:
         if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
             return Object.assign({}, state, {
@@ -429,6 +481,17 @@ const onLoadedProject = (loadingState, canSave, success) => {
         }
         // failed to load project; just keep showing current project
         return {type: RETURN_TO_SHOWING};
+//{{ #5
+    case LoadingState.VM_CACHE_WITH_ID:
+        if (success) {
+            if (canSave) {
+                return {type: DONE_LOADING_VM_TO_SAVE};
+            }
+            return {type: DONE_LOADING_VM_WITHOUT_ID};
+        }
+        // failed to load project; just keep showing current project
+        return {type: RETURN_TO_SHOWING};
+//}} #5
     case LoadingState.LOADING_VM_NEW_DEFAULT:
         if (success) {
             return {type: DONE_LOADING_VM_WITHOUT_ID};
@@ -488,6 +551,33 @@ const requestProjectUpload = loadingState => {
     }
 };
 
+//{{ #5
+const requestCacheUpload = (loadingState, cacheId) => {
+    switch (loadingState) {
+    case LoadingState.NOT_LOADED:
+    case LoadingState.SHOWING_WITH_ID:
+    case LoadingState.SHOWING_WITHOUT_ID:
+        return {
+            type: START_LOADING_VM_CACHE_UPLOAD,
+            cacheId: cacheId
+        };
+    default:
+        break;
+    }
+};
+const startCacheUpload = (cacheId) => {
+    return {
+        type: START_LOADING_VM_CACHE_UPLOAD,
+        cacheId: cacheId
+    };
+};
+const doneCacheUpload = () => {
+    return {
+        type: DONE_VM_CACHE_WITH_ID
+    };
+};
+//}} #5
+
 const autoUpdateProject = () => ({
     type: START_AUTO_UPDATING
 });
@@ -523,6 +613,9 @@ export {
     getIsLoading,
     getIsLoadingWithId,
     getIsLoadingUpload,
+//{{ #5
+    getIsLoadingCacheUpload,
+//}} #5
     getIsManualUpdating,
     getIsRemixing,
     getIsShowingProject,
@@ -536,6 +629,11 @@ export {
     remixProject,
     requestNewProject,
     requestProjectUpload,
+//{{ #5
+    requestCacheUpload,
+    startCacheUpload,
+    doneCacheUpload,
+//}} #5
     saveProjectAsCopy,
     setProjectId
 };
