@@ -205,7 +205,7 @@ var handleTelemetryModalOptOut = function handleTelemetryModalOptOut() {
   }) :
   /*#__PURE__*/
   //{{ #3
-  // �g���Ȃ��@�\���폜
+  // 使えない機能を削除
   react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
     canEditTitle: true //backpackVisible
     ,
