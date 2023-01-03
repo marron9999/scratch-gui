@@ -15,3 +15,9 @@
 		SB3-HTML変換メニュー処理を追加
 	scratch-gui\src\lib\opcode-infos.js
 		scratch-blocks opecode定義を追加
+
+#3	scratch-gui\src\playground\render-gui.jsx
+		使えない機能を削除
+
+#4	scratch-gui\src\components\language-selector\language-selector.css
+		言語選択上のマウス形状を修正

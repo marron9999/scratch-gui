@@ -12,6 +12,9 @@
     font-size: .875rem;
     color: $text-primary;
     background: $ui-white;
+/*{{ #4*/
+    cursor: pointer;
+/*}} #4*/
 }
 
 [dir="ltr"] .language-select {
