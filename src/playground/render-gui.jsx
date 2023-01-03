@@ -73,13 +73,16 @@ export default appTarget => {
                 onTelemetryModalOptIn={handleTelemetryModalOptIn}
                 onTelemetryModalOptOut={handleTelemetryModalOptOut}
             /> :
+//{{ #3
+// 使えない機能を削除
             <WrappedGui
                 canEditTitle
-                backpackVisible
-                showComingSoon
+                //backpackVisible
+                showComingSoon={false}
                 backpackHost={backpackHost}
                 canSave={false}
-                onClickLogo={onClickLogo}
+                //onClickLogo={onClickLogo}
             />,
+//}} #3
         appTarget);
 };
