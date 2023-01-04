@@ -1,26 +1,20 @@
-#1	scratch-gui\src\lib\make-toolbox-xml.js
-		ツールボックスアイコンの変更
-	scratch-gui\src\lib\toolbox/*
-		ツールボックスアイコン(PNG)の追加
+#7	scratch-blocks\core\css.js
+		カテゴリ：ホバー表示時は太字に
 
-#2	scratch-vm\src\serialization\sb3-html.js
-		SB3-HTML変換処理を追加
-	scratch-vm\src\virtual-machine.js
-		SB3-HTML変換呼び出しを追加
-	scratch-gui\package.json
-		format-messageを追加
-	scratch-gui\src\components\menu-bar\menu-bar.jsx
-		SB3-HTML変換メニューを追加
-	scratch-gui\src\containers\sb3-makehtml.jsx
-		SB3-HTML変換メニュー処理を追加
-	scratch-gui\src\lib\opcode-infos.js
-		scratch-blocks opecode定義を追加
-
-#3	scratch-gui\src\playground\render-gui.jsx
-		使えない機能を削除
-
-#4	scratch-gui\src\components\language-selector\language-selector.css
-		言語選択上のマウス形状を修正
+#6	scratch-blocks\blocks_vertical\default_toolbox.js
+		文字列の評価関数(eval)を追加
+	scratch-blocks\blocks_vertical\operators.js
+		文字列の評価関数(eval)を追加
+	scratch-blocks\msg\js\en.js
+		文字列の評価関数(eval)を追加
+	scratch-blocks\msg\json\en.json
+		文字列の評価関数(eval)を追加
+	scratch-blocks\msg\messages.js
+		文字列の評価関数(eval)を追加
+	scratch-vm\src\blocks\scratch3_operators.js
+		文字列の評価関数(eval)を追加
+	scratch-gui\src\lib\make-toolbox-xml.js
+		文字列の評価関数(eval)を追加
 
 #5	scratch-vm\src\engine\runtime.js
 		拡張情報変数の追加
@@ -28,7 +22,6 @@
 		拡張情報変数の変更
 	scratch-vm\src\virtual-machine.js
 		拡張情報変数へユニークIDを設定
-
 	scratch-gui\src\components\gui\gui.jsx
 		キャッシュへのSB3自動保存と読み込み
 	scratch-gui\src\components\menu-bar\menu-bar.jsx
@@ -49,3 +42,27 @@
 		キャッシュのI/O処理を追加
 	scratch-gui\src\reducers\project-state.js
 		用のI/O処理を追加
+
+#4	scratch-gui\src\components\language-selector\language-selector.css
+		言語選択上のマウス形状を修正
+
+#3	scratch-gui\src\playground\render-gui.jsx
+		使えない機能を削除
+
+#2	scratch-vm\src\serialization\sb3-html.js
+		SB3-HTML変換処理を追加
+	scratch-vm\src\virtual-machine.js
+		SB3-HTML変換呼び出しを追加
+	scratch-gui\package.json
+		format-messageを追加
+	scratch-gui\src\components\menu-bar\menu-bar.jsx
+		SB3-HTML変換メニューを追加
+	scratch-gui\src\containers\sb3-makehtml.jsx
+		SB3-HTML変換メニュー処理を追加
+	scratch-gui\src\lib\opcode-infos.js
+		scratch-blocks opecode定義を追加
+
+#1	scratch-gui\src\lib\make-toolbox-xml.js
+		ツールボックスアイコンの変更
+	scratch-gui\src\lib\toolbox/*
+		ツールボックスアイコン(PNG)の追加

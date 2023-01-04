@@ -714,6 +714,16 @@ const operators = function (isInitialSetup) {
                 </shadow>
             </value>
         </block>
+<!--{{ #6-->
+        ${blockSeparator}
+        <block type="operator_eval">
+            <value name="STRING">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+        </block>
+<!--}} #6-->
         ${categorySeparator}
     </category>
     `;

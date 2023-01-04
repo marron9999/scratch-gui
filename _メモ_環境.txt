@@ -86,7 +86,7 @@ STEP8) start cmd.exe
 STEP9) ssh キー作成 (git-bash下)
 
 	cd ~/.ssh
-	ssh-keygen -t t ed25519
+	ssh-keygen -t ed25519
 		名前に例)scratch-gui
 		あと２回空enter
 
