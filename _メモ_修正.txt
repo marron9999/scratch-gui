@@ -1,3 +1,40 @@
+#9	scratch-blocks\blocks_vertical\default_toolbox.js
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-blocks\blocks_vertical\control.js
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-blocks\msg\js\en.js
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-blocks\msg\json\en.json
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-blocks\msg\messages.js
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-vm\src\blocks\scratch3_operators.js
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-vm\src\virtual-machine.js
+		PROJECT_LOADEDイベントの追加
+	scratch-vm\src\engine\runtime.js
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\components\gui\gui.jsx
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\components\output\output.css
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\components\output\output.jsx
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\components\output\output_io.jsx
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\containers\output.jsx
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\containers\blocks.jsx
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\playground\render-gui.jsx
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\lib\make-toolbox-xml.js
+		OUTPUT域への表示関数(output、clear)を追加
+	scratch-gui\src\containers\sb3-makehtml.jsx
+		表示文字列処理の変更
+	scratch-gui\src\containers\sb3-loadcache.jsx
+		表示文字列処理の変更
+
 #8	scratch-blocks\blocks_vertical\default_toolbox.js
 		文字列の評価関数(trim)を追加
 	scratch-blocks\blocks_vertical\operators.js
