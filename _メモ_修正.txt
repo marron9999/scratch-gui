@@ -1,3 +1,18 @@
+#8	scratch-blocks\blocks_vertical\default_toolbox.js
+		文字列の評価関数(trim)を追加
+	scratch-blocks\blocks_vertical\operators.js
+		文字列の評価関数(trim)を追加
+	scratch-blocks\msg\js\en.js
+		文字列の評価関数(trim)を追加
+	scratch-blocks\msg\json\en.json
+		文字列の評価関数(trim)を追加
+	scratch-blocks\msg\messages.js
+		文字列の評価関数(trim)を追加
+	scratch-vm\src\blocks\scratch3_operators.js
+		文字列の評価関数(trim)を追加
+	scratch-gui\src\lib\make-toolbox-xml.js
+		文字列の評価関数(trim)を追加
+
 #7	scratch-blocks\core\css.js
 		カテゴリ：ホバー表示時は太字に
 

@@ -1,0 +1,26 @@
+(1) localstorage
+
+Key (example)		Value (example)
+----------------------	-----------------------
+scratch.project		[4, 3, 2, 1]
+scratch.4		{"date":"2023/01/03","time":"19:29:37.940",
+				"filename":"Line and Dot ⠀(Snake Remake).sb3",
+				"uniqueId":"-[`U/#:j0D@rqSz8kki;",
+				"cacheId":4}
+
+[4, 3, 2, 1]は、それぞれ「scratch.数字」に対応（最新順、最大8個）
+date、timeは、保管された日時
+filenameは、SB3ファイル名
+uniqueIdは、ユニークなID（uuid）
+cacheIdは、indexDBのキーの一部
+
+(2) indexDB: scratch
+
+Key (example)		Value (example)
+----------------------	-----------------------
+4c			{id: '4c', content: Blobデータ}
+4i			{id: '4i', image: 'data:image/png;base64,iVB ...', size: [240, 180]}
+
+「4c」「4i」はcacheIdの後ろにそれぞれ「c」「i」を付けたもの
+「4c」はsb3の中身（バイナリデータ）
+「4i」はscratch画面に表示されていたイメージ（base64デコード値）
