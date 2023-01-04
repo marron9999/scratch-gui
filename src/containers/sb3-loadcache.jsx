@@ -7,9 +7,17 @@ const maxData = -1;
 
 const labelLoadCache = function (mode) {
 	const msgs = {
+	'en': {
+		'loadcache.loadFromCache':"Load from browser cache",
+		'loadcache.loadFromCache2':"Load %1",
+	},
 	'ja': {
 		'loadcache.loadFromCache':"ブラウザキャシュから読み込む",
 		'loadcache.loadFromCache2':"%1 を読み込む",
+	},
+	'ja-Hira': {
+		'loadcache.loadFromCache':"ブラウザキャシュからよみこむ",
+		'loadcache.loadFromCache2':"%1 をよみこむ",
 	} };
     const localeSetup = formatMessage.setup({locale:document.documentElement.lang});
 	for (const locale in msgs) {
@@ -19,17 +27,9 @@ const labelLoadCache = function (mode) {
 		Object.assign(localeSetup.translations[locale], msgs[locale]);
 	}
 	if(mode) {
-		return formatMessage({
-			id:"loadcache.loadFromCache2",
-			default:"Load %1",
-			description:"Menu bar item for load from browser cache"
-	});
+		return formatMessage({id:"loadcache.loadFromCache2"});
 	}
-	return formatMessage({
-			id:"loadcache.loadFromCache",
-			default:"Load from browser cache",
-			description:"Menu bar item for load from browser cache"
-	});
+	return formatMessage({id:"loadcache.loadFromCache"});
 };
 
 const enableCache = function (enable) {

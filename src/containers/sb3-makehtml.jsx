@@ -13,6 +13,9 @@ const makeProjectHTML = function (title, vm) {
 
 const labelMakeProjectHTML = function () {
     const msgs = {
+    'en': {
+        'makehtml.makeHTMLToComputer':"Save document to your computer",
+    },
     'ja': {
         'makehtml.makeHTMLToComputer':"コンピューターにドキュメントを保存する",
     },
@@ -26,11 +29,7 @@ const labelMakeProjectHTML = function () {
         }
         Object.assign(localeSetup.translations[locale], msgs[locale]);
     }
-    return formatMessage({
-            id:"makehtml.makeHTMLToComputer",
-            default:"Save document to your computer",
-            description:"Menu bar item for make document to your computer"
-    });
+    return formatMessage({id:"makehtml.makeHTMLToComputer"});
 };
 
 export { 
