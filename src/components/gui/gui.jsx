@@ -31,6 +31,10 @@ import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
+//{{ #9
+import Output from '../../containers/output.jsx';
+//}} #9
+
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
 
@@ -77,6 +81,9 @@ const GUIComponent = props => {
         canUseCloud,
         children,
         connectionModalVisible,
+//{{ #9
+        outputVisible,
+//}} #9
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
@@ -343,6 +350,9 @@ const GUIComponent = props => {
                             {backpackVisible ? (
                                 <Backpack host={backpackHost} />
                             ) : null}
+                            {outputVisible ? (
+                                <Output />
+                            ) : null}
                         </Box>
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
@@ -392,6 +402,9 @@ GUIComponent.propTypes = {
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
+//{{ #9
+    outputVisible: PropTypes.bool,
+//}} #9
     enableCommunity: PropTypes.bool,
     intl: intlShape.isRequired,
     isCreating: PropTypes.bool,
@@ -417,9 +430,6 @@ GUIComponent.propTypes = {
     onShare: PropTypes.func,
     onShowPrivacyPolicy: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
-//{{ #5
-    onStartSelectingCacheUpload: PropTypes.func,
-//}} #5
     onTabSelect: PropTypes.func,
     onTelemetryModalCancel: PropTypes.func,
     onTelemetryModalOptIn: PropTypes.func,
@@ -447,6 +457,9 @@ GUIComponent.defaultProps = {
     canCreateCopy: false,
     canShare: false,
     canUseCloud: false,
+//{{ #9
+    outputVisible: true,
+//}} #9
     enableCommunity: false,
     isCreating: false,
     isShared: false,
