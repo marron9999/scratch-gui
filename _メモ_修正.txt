@@ -1,3 +1,8 @@
+#10	scratch-audio\src\AudioEngine.js
+		起動時にStartAudioContextでの多量エラー発生を抑止
+	scratch-gui\src\lib\vm-manager-hoc.jsx
+		起動時にStartAudioContextでの多量エラー発生を抑止
+
 #9	scratch-blocks\blocks_vertical\default_toolbox.js
 		OUTPUT域への表示関数(output、clear)を追加
 	scratch-blocks\blocks_vertical\control.js

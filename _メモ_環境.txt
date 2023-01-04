@@ -45,7 +45,7 @@ STEP4) start scratch-gui
 
 	CTRL+Cでscratch-guiを止める
 
-STEP5) scratch-blocks 0.1.0 (develop)
+STEP5-1) scratch-blocks 0.1.0 (develop)
 
 	npm install		エラーが通知されるが気にしない
 	npm run build		エラーが通知されるが気にしない
@@ -55,9 +55,15 @@ STEP5) scratch-blocks 0.1.0 (develop)
 				block ～.js
 	npm link
 
+STEP5-2) scratch-audio 0.1.0 (develop)
+
+	npm install
+	npm run build
+	npm link
+
 STEP6) build scratch-gui 1.2.6 (develop)
 
-	npm link scratch-vm scratch-blocks
+	npm link scratch-vm scratch-blocks scratch-audio
 
 STEP7) start scratch-gui
 
@@ -110,13 +116,19 @@ STEP11) scratch-gui
 
 修正して確認したら
 
-STEP1) [必要なら] scratch-blocks
+STEP1-1) [必要なら] scratch-blocks
 
 	npm run build		エラーが通知されるが気にしない
 	./local_build_h.sh
 	./local_build_v.sh
 				下記の７ファイル作成されればOK
 				blockl ～.js
+
+	githubへコミットする
+
+STEP1-2) [必要なら] scratch-audio
+
+	npm run build
 
 	githubへコミットする
 
