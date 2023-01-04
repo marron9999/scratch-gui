@@ -430,6 +430,9 @@ GUIComponent.propTypes = {
     onShare: PropTypes.func,
     onShowPrivacyPolicy: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
+//{{ #5
+    onStartSelectingCacheUpload: PropTypes.func,
+//}} #5
     onTabSelect: PropTypes.func,
     onTelemetryModalCancel: PropTypes.func,
     onTelemetryModalOptIn: PropTypes.func,
