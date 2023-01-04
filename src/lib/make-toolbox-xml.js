@@ -444,6 +444,18 @@ const control = function (isInitialSetup, isStage) {
             </block>
             <block type="control_delete_this_clone"/>
         `}
+<!--{{ #9-->
+        ${blockSeparator}
+        <block type="control_output">
+            <value name="STRING">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="control_clear">
+        </block>
+<!--}} #9-->
         ${categorySeparator}
     </category>
     `;
