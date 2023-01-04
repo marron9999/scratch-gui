@@ -84,6 +84,9 @@ class Blocks extends React.Component {
 			,'handleBlockChangeListener'
 			,'handleTargetStopListener'
 //}} #5
+//{{ #9
+			,'handleProjectLoadedListener'
+//}} #9
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
@@ -281,6 +284,9 @@ class Blocks extends React.Component {
         this.props.vm.addListener('STOP_FOR_TARGET', this.handleTargetStopListener);
         this.workspace.addChangeListener(this.handleBlockChangeListener);
 //}} #5
+//{{ #9
+        this.props.vm.addListener('PROJECT_LOADED', this.handleProjectLoadedListener);
+//}} #9
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -300,6 +306,9 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('PROJECT_STOP_ALL', this.handleTargetStopListener);
         this.props.vm.removeListener('STOP_FOR_TARGET', this.handleTargetStopListener);
 //}} #5
+//{{ #9
+        this.props.vm.removeListener('PROJECT_LOADED', this.handleProjectLoadedListener);
+//}} #9
     }
 
     updateToolboxBlockValue (id, value) {
@@ -621,14 +630,21 @@ class Blocks extends React.Component {
 		if (['create', 'change', 'delete', 'move', "rename"]
 			.indexOf(event.type) == -1) return;
 		let uniqueId = this.props.vm.runtime.extend.uniqueId;
-		saveCache(uniqueId, this.props.projectFilename, this.props.vm);
+		let filename = getProjectFilename(this.props.projectname, projectTitleInitialState);
+		saveCache(uniqueId, filename, this.props.vm);
 	}
 	handleTargetStopListener(event) {
 		//console.log("handleTargetStopListener:" + event.type);
 		let uniqueId = this.props.vm.runtime.extend.uniqueId;
-		saveCache(uniqueId, this.props.projectFilename, this.props.vm);
+		let filename = getProjectFilename(this.props.projectname, projectTitleInitialState);
+		saveCache(uniqueId, filename, this.props.vm);
 	}
 //}} #5
+//{{ #9
+	handleProjectLoadedListener(event) {
+		this.props.vm.runtime.outputClear();
+	}
+//}} #9
 }
 
 Blocks.propTypes = {
@@ -676,6 +692,9 @@ Blocks.propTypes = {
     workspaceMetrics: PropTypes.shape({
         targets: PropTypes.objectOf(PropTypes.object)
     })
+//{{ #5
+	,projectname: PropTypes.string
+//}} #5
 };
 
 Blocks.defaultOptions = {
@@ -724,13 +743,13 @@ const mapStateToProps = state => ({
     customProceduresVisible: state.scratchGui.customProcedures.active,
     workspaceMetrics: state.scratchGui.workspaceMetrics
 //{{ #5
-	,projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState)
+	,projectname: state.scratchGui.projectTitle
 //}} #5
 });
 
 //{{ #5
-const getProjectFilename = (curTitle, defaultTitle) => {
-    let filenameTitle = curTitle;
+const getProjectFilename = (currTitle, defaultTitle) => {
+    let filenameTitle = currTitle;
     if (!filenameTitle || filenameTitle.length === 0) {
         filenameTitle = defaultTitle;
     }
