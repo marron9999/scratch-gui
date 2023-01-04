@@ -1,0 +1,16 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.outputContainer {
+    margin-top: 0.5rem;
+    background: $ui-white;
+    border: 1px solid $ui-black-transparent;
+    overflow: hidden auto;
+    height: 5.5em;
+    width: calc(100%);
+    color: $text-primary;
+    font-size: 0.85rem;
+    font-family: monospace;
+    padding: 0 0.4em;
+    word-break: break-all;
+}
