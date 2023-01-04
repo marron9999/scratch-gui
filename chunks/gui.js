@@ -204,16 +204,18 @@ var handleTelemetryModalOptOut = function handleTelemetryModalOptOut() {
     onTelemetryModalOptOut: handleTelemetryModalOptOut
   }) :
   /*#__PURE__*/
-  //{{ #3
-  // 使えない機能を削除
+  //{{ #3, #9
+  // #3 使えない機能を削除
+  // #9 output機能を追加
   react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
     canEditTitle: true //backpackVisible
+    //backpackHost={backpackHost}
     ,
+    outputVisible: true,
     showComingSoon: false,
-    backpackHost: backpackHost,
     canSave: false //onClickLogo={onClickLogo}
 
-  }), //}} #3
+  }), //}} #3, #9
   appTarget);
 });
 
