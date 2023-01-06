@@ -9,7 +9,7 @@ scratch.4		{"date":"2023/01/03","time":"19:29:37.940",
 				"cacheId":4}
 
 [4, 3, 2, 1]は、それぞれ「scratch.数字」に対応（最新順、最大8個）
-date、timeは、保管された日時
+date、timeは、格納した日時
 filenameは、SB3ファイル名
 uniqueIdは、ユニークなID（uuid）
 cacheIdは、indexDBのキーの一部

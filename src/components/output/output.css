@@ -5,12 +5,24 @@
     margin-top: 0.5rem;
     background: $ui-white;
     border: 1px solid $ui-black-transparent;
+}
+.outputBody,
+.outputBody2 {
     overflow: hidden auto;
     height: 5.5em;
-    width: calc(100%);
     color: $text-primary;
     font-size: 0.85rem;
     font-family: monospace;
     padding: 0 0.4em;
     word-break: break-all;
+    display: inline-block;
+}
+.outputBody {
+    border-right: 1px solid $ui-white;
+    width: calc(100%);
+}
+.outputBody2 {
+    border-left: 1px solid $ui-black-transparent;
+    width: calc(50%);
+    display: none;
 }

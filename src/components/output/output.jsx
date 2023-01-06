@@ -5,7 +5,11 @@ import {injectIntl} from 'react-intl';
 import styles from './output.css';
 
 const Output = ({}) => (
-    <div className={styles.outputContainer} contentEditable="true">
+    <div className={styles.outputContainer}>
+    <div className={styles.outputBody}>
+    </div>
+    <div className={styles.outputBody2}>
+    </div>
     </div>
 );
 

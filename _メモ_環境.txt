@@ -78,7 +78,7 @@ STEP8) start cmd.exe
 	cd ～\scratch-gui\node_modules
 	dir scr*		以下のような表示を確認	
 
-<DIR>          scratch-audio
+<JUNCTION>     scratch-audio [ ～\scratch-audio]
 <JUNCTION>     scratch-blocks [ ～\scratch-blocks]
 <DIR>          scratch-l10n
 <DIR>          scratch-paint
@@ -147,6 +147,6 @@ STEP3) scratch-gui
 	npm run deploy
 
 	https://～.github.io/scratch-gui
-	を開き、修正されたscratchエディタ画面が
-	表示されればOK
+	を開き、scratchエディタに修正した
+	内容が反映されていればOK
 
